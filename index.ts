@@ -50,7 +50,12 @@ if(endDate.value < startDate.value){
 const totalSpan:any = document.querySelector('#total');
 
  const bookingCalc = () =>{
-    let diff = Math.abs(
+    // Math.abs 
+    let test = new Date().valueOf();
+    console.log(typeof test);
+    
+    let diff = Math.floor(
+        // pour effectuer ce calculer car new date est un objet on doit lui mettre la méthode .valuesOf() qui va transformer notre object new Date en number 
         new Date(endDate.value).valueOf() - new Date(startDate.value).valueOf()
         );
         // date de fin - la date du debut 

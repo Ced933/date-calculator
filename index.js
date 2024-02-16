@@ -37,7 +37,12 @@ endDate.addEventListener('change', () => {
 });
 const totalSpan = document.querySelector('#total');
 const bookingCalc = () => {
-    let diff = Math.abs(new Date(endDate.value).valueOf() - new Date(startDate.value).valueOf());
+    // Math.abs 
+    let test = new Date().valueOf();
+    console.log(typeof test);
+    let diff = Math.floor(
+    // pour effectuer ce calculer car new date est un objet on doit lui mettre la méthode .valuesOf() qui va transformer notre object new Date en number 
+    new Date(endDate.value).valueOf() - new Date(startDate.value).valueOf());
     // date de fin - la date du debut 
     console.log(diff);
     // convertir les seconde en jour il y a 86400 seconde dans un jour donc new date / par 86400 le tout / par 1000  ou on peut faire diff/(1000*60*60*24)seconde*minute*heure ce qui revient au meme   
