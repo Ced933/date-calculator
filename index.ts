@@ -18,6 +18,11 @@ let tomorrowFormat = tomorrow.toISOString().split('T')[0]
 endDate.value = tomorrowFormat;
 endDate.min = tomorrowFormat;
 
+
+
+
+
+
  startDate.addEventListener('change', (e:any)=>{
 let day = new Date(startDate.value) ;
 console.log(day);
@@ -27,8 +32,10 @@ if(endDate.value < startDate.value){
     day.setDate(day.getDate()+1)
     endDate.value = day.toISOString().split('T')[0]
 }
+// bookingCalc()
  })
 
+//  Quand on va changer la date de enddate il faut que la date de start soit inférieur a cette derniere  
  endDate.addEventListener('change', ()=>{
     let endToday = new Date(endDate.value)
     console.log(endToday);
@@ -36,5 +43,40 @@ if(endDate.value < startDate.value){
         endToday.setDate(endToday.getDate()-1);
         startDate.value = endToday.toISOString().split('T')[0]
     }
-    
+    // bookingCalc()
  })
+
+
+const totalSpan:any = document.querySelector('#total');
+
+ const bookingCalc = () =>{
+    let diff = Math.abs(
+        new Date(endDate.value).valueOf() - new Date(startDate.value).valueOf()
+        );
+        // date de fin - la date du debut 
+        console.log(diff);
+        // convertir les seconde en jour il y a 86400 seconde dans un jour donc new date / par 86400 le tout / par 1000  ou on peut faire diff/(1000*60*60*24)seconde*minute*heure ce qui revient au meme   
+        let days = Math.ceil(diff / 86400) /1000;
+        console.log(days);
+        // calculer le nombre de jour fois le prix d'un jour exemple 4j x 46
+        let totalPrice = days * 46;
+        console.log(totalPrice);
+        // si l'arrivée et le meme jour que le depart ça compte comme un jour 
+        if(days === 0){
+            totalSpan.innerHTML = 46;
+        }else{
+
+            totalSpan.innerHTML = totalPrice;
+        }
+        
+
+        
+ }
+
+ const btn:any = document.querySelector(".btn");
+
+ btn.addEventListener('click',()=>{
+    bookingCalc()
+ })
+ 
+ window.addEventListener('load', bookingCalc)
